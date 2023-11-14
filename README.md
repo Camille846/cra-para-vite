@@ -1,11 +1,11 @@
-## Passo a passo para migrar create-react-app para Vite</h2>
+# Passo a passo para migrar create-react-app para Vite
 
-- Instalar o Vite e Vite Plugin <code>npm install -D vite @vitejs/plugin-react</code>
+### 1. Instalar o Vite e Vite Plugin 
 ```
 npm install -D vite @vitejs/plugin-react
 ```
-- Considerar baixar <code>vite-plugin-svgr</code> que transforma SVG em component React
-- Criar arquivo de configuração do Vite: <code>vite.config.js</code>
+### 2. Considerar baixar <code>vite-plugin-svgr</code> que transforma SVG em component React
+### 3. Criar arquivo de configuração do Vite: <code>vite.config.js</code>
 ```js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -20,25 +20,25 @@ export default defineConfig({
     },
 })
 ```
-- Criar arquivo <code>vite-env.d.ts</code> para criar Vite Reference Types
+### 4. Criar arquivo <code>vite-env.d.ts</code> para criar Vite Reference Types
 ```js
 /// <reference types="vite/client" />
 ```
-- Atualizar e mover o arquivo <code>index.html</code> para o diretório <code>public</code>
-- Remover qualquer referência %PUBLIC_URL% do arquivo <code>index.html</code>
+### 5. Atualizar e mover o arquivo <code>index.html</code> para o diretório <code>public</code>
+### 6.Remover qualquer referência %PUBLIC_URL% do arquivo <code>index.html</code>
 ```html
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 ```
-- Adicionar módulo <code>script type = "module"</code> no arquivo <code>index.html</code>
+### 7. Adicionar módulo <code>script type = "module"</code> no arquivo <code>index.html</code>
 ```html
 <script type="module" src="/src/index.tsx"></script>
 ```
-- Remover create-react-app <code>npm uninstall react-scripts</code>
+### 8. Remover create-react-app <code>npm uninstall react-scripts</code>
 ```
 npm uninstall react-scripts
 ```
-- Deletar <code>react-app-env.d.ts</code>
-- Adicionar Vite ao <code>package.json</code>
+### 9. Deletar <code>react-app-env.d.ts</code>
+### 10. Adicionar Vite ao <code>package.json</code>
 ```js
 {  
   "scripts": {
@@ -48,7 +48,7 @@ npm uninstall react-scripts
   }
 },
 ```
-- Atualizar <code>tsconfig.json</code>
+### 11. Atualizar <code>tsconfig.json</code>
 ```js
 {  
     "compilerOptions": {    
@@ -60,7 +60,7 @@ npm uninstall react-scripts
  }
 ```
 
-- Atualizar <code>process.env.REACT_APP_VARIABLE</code>
+### 12. Atualizar <code>process.env.REACT_APP_VARIABLE</code>
 
 Antes:
 ```js
@@ -73,7 +73,7 @@ Depois:
 import.meta.env.REACT_APP_VARIABLE
 ```
 
-- Atualizar variável em <code>process.env</code>
+### 13. Atualizar variável em <code>process.env</code>
 
 Antes:
 ```js
