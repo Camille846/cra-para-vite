@@ -1,30 +1,83 @@
 # Passo a passo para migrar create-react-app para Vite
 
-### 1. Instalar o Vite e Vite Plugin 
+### 1. Ir ao <code>package.json</code> e substituir <code>react-scripts</code> por <code>vite</code>
+
+- Antes
+
+```json
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
 ```
-npm install -D vite @vitejs/plugin-react
+- Depois
+
+```json
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "vite start",
+    "build": "vite build",
+    "test": "vite test",
+    "eject": "vite eject",
+    "serve": "vite preview"
+  },
 ```
-### 2. Considerar baixar <code>vite-plugin-svgr</code> que transforma SVG em component React
-### 3. Criar arquivo de configuração do Vite: <code>vite.config.js</code>
+### 2. Instalar dependências
+
+Remover pasta <code>node_modules</code> e instalar dependências
+```
+npm i
+```
+### 3. Instalar o Vite e Vite Plugin 
+```
+npm i vite @vitejs/plugin-react
+```
+#### obs: Considerar baixar <code>vite-plugin-svgr</code> que transforma SVG em component React
+
+### 4. Criar arquivo de configuração do Vite: <code>vite.config.js</code>
 ```js
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import viteTsconfigPaths from 'vite-tsconfig-paths'
+import reactRefresh from '@vitejs/plugin-react'
 
 export default defineConfig({
-    base: '',
-    plugins: [react(), viteTsconfigPaths()],
+    build: {
+        outDir: 'build',
+    },
+    plugins: [reactRefresh()],
     server: {    
         open: true, 
         port: 3000, 
     },
 })
 ```
-### 4. Criar arquivo <code>vite-env.d.ts</code> para criar Vite Reference Types
-```js
-/// <reference types="vite/client" />
-```
-### 5. Atualizar e mover o arquivo <code>index.html</code> para o diretório <code>public</code>
+### 5. Atualizar e mover o arquivo <code>index.html</code> fora do diretório <code>public</code>
+
 ### 6.Remover qualquer referência %PUBLIC_URL% do arquivo <code>index.html</code>
 ```html
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -33,34 +86,8 @@ export default defineConfig({
 ```html
 <script type="module" src="/src/index.tsx"></script>
 ```
-### 8. Remover create-react-app <code>npm uninstall react-scripts</code>
-```
-npm uninstall react-scripts
-```
-### 9. Deletar <code>react-app-env.d.ts</code>
-### 10. Adicionar Vite ao <code>package.json</code>
-```js
-{  
-  "scripts": {
-    "start": "vite", // start dev server
-    "build": "tsc && vite build", // build for production
-    "preview": "vite preview" // locally preview production build
-  }
-},
-```
-### 11. Atualizar <code>tsconfig.json</code>
-```js
-{  
-    "compilerOptions": {    
-        "lib": ["dom", "dom.iterable", "esnext"],    
-        "target": "ESNext",    
-        "types": ["vite/client"],
-        "isolatedModules": true,
-    },
- }
-```
 
-### 12. Atualizar <code>process.env.REACT_APP_VARIABLE</code>
+### 8. Atualizar <code>process.env.REACT_APP_VARIABLE</code>
 
 Antes:
 ```js
@@ -73,7 +100,7 @@ Depois:
 import.meta.env.REACT_APP_VARIABLE
 ```
 
-### 13. Atualizar variável em <code>process.env</code>
+### 9. Atualizar variável em <code>process.env</code>
 
 Antes:
 ```js
