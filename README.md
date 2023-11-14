@@ -41,10 +41,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "dev": "vite",
     "start": "vite start",
     "build": "vite build",
-    "test": "vite test",
-    "eject": "vite eject",
     "serve": "vite preview"
   },
 ```
@@ -66,14 +65,7 @@ import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react'
 
 export default defineConfig({
-    build: {
-        outDir: 'build',
-    },
     plugins: [reactRefresh()],
-    server: {    
-        open: true, 
-        port: 3000, 
-    },
 })
 ```
 ### 5. Atualizar e mover o arquivo <code>index.html</code> fora do diretório <code>public</code>
