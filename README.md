@@ -104,3 +104,8 @@ Depois:
 ```js
 VITE_APP_API_BASE
 ```
+### 10. Rodando código para visualizar projeto
+
+```js
+npm run dev
+```
