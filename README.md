@@ -34,7 +34,7 @@ Este guia destaca as razões para considerar a migração do Create React App (C
 
 - **Vite:** Estrutura simplificada com pastas "src" e "public".
 
-- **CRA:** Além de "src", possui pastas como "public" e "build".
+- **CRA:** Além de "src", há outras pastas e arquivos que são gerados automaticamente pelo webpack durante a compilação do aplicativo, por exemplo, além de "public", há também a pasta "build".
 
 ### Opções de Configuração
 
