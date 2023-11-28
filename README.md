@@ -9,7 +9,8 @@
    5. [Bibliotecas Externas](#bibliotecas-externas)
 3. [Considerações de Escalabilidade](#considerações-de-escalabilidade)
 4. [Passo a passo para migrar create-react-app para Vite](#passo-a-passo-para-migrar-create-react-app-para-vite)
-5. [Conclusão](#conclusão)
+5. [Solução de Problemas](#solução-de-problemas)
+6. [Conclusão](#conclusão)
 
 
 ## Introdução
@@ -170,6 +171,122 @@ VITE_APP_API_BASE
 
 ```js
 npm run dev
+```
+
+## Solução de Problemas
+
+### 1. Se você encontrar o erro ReferenceError: <code> process is not defined </code> de uma biblioteca, verifique se ela está em execução com a seguinte solução alternativa:
+
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig(() => {
+  return {
+    define: {
+      'process.env': {},
+    },
+    build: {
+      outDir: 'build',
+    },
+    plugins: [react()],
+  };
+});
+```
+
+### 2. Se deseja continuar usando SVGs em seu projeto Vite, instale o vite-plugin-svgr como dependência de desenvolvimento. Em seguida, inclua-o no arquivo de configuração do Vite
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
+
+export default defineConfig(() => {
+  return {
+    build: {
+      outDir: 'build',
+    },
+    plugins: [
+      react(),
+      // Opções do svgr: https://react-svgr.com/docs/options/
+      svgr({ svgrOptions: { icon: true } }),
+    ],
+  };
+});
+```
+Isso permite que você importe SVGs como componentes React:
+
+```javascript
+// import { ReactComponent as MyIcon } from './my-icon.svg';
+```
+
+### 3. Se deseja usar imports com alias em seu projeto Vite, defina-os da seguinte maneira:
+
+```javascript
+import path from 'path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
+
+export default defineConfig(() => {
+  return {
+    resolve: {
+      alias: {
+        '~': path.resolve(__dirname, './src'),
+      },
+    },
+    build: {
+      outDir: 'build',
+    },
+    plugins: [react()],
+  };
+});
+```
+Isso permite que você importe de pastas dentro da pasta /src:
+
+```javascript
+// import Button from '~/components/Button';
+```
+
+### 4. Se precisar dar suporte ao Emotion em seu projeto Vite:
+
+
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig(() => {
+  return {
+    build: {
+      outDir: 'build',
+    },
+    plugins: [
+      react({
+        jsxImportSource: '@emotion/react',
+        babel: {
+          plugins: ['@emotion/babel-plugin'],
+        },
+      }),
+    ],
+  };
+});
+```
+### 5.Se deseja abrir o navegador ao iniciar o servidor, use a seguinte configuração do Vite:
+
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig(() => {
+  return {
+    server: {
+      open: true,
+    },
+    build: {
+      outDir: 'build',
+    },
+    plugins: [react()],
+  };
+});
 ```
 ## Conclusão
 
