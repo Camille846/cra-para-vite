@@ -1,7 +1,5 @@
 # Migração create-react-app para Vite
 
-# Menu
-
 1. [Introdução](#introdução)
 2. [Principais Diferenças](#principais-diferenças)
    1. [Abordagem de Compilação](#abordagem-de-compilação)
@@ -10,19 +8,7 @@
    4. [Opções de Configuração](#opções-de-configuração)
    5. [Bibliotecas Externas](#bibliotecas-externas)
 3. [Considerações de Escalabilidade](#considerações-de-escalabilidade)
-   1. [Velocidade de Compilação](#velocidade-de-compilação-1)
-   2. [Babel](#babel)
 4. [Passo a passo para migrar create-react-app para Vite](#passo-a-passo-para-migrar-create-react-app-para-vite)
-   1. [Ir ao `package.json` e substituir `react-scripts` por `vite`](#1-ir-ao-packagejson-e-substituir-react-scripts-por-vite)
-   2. [Instalar dependências](#2-instalar-dependências)
-   3. [Instalar o Vite e Vite Plugin](#3-instalar-o-vite-e-vite-plugin)
-   4. [Criar arquivo de configuração do Vite: `vite.config.js`](#4-criar-arquivo-de-configuração-do-vite-viteconfigjs)
-   5. [Atualizar e mover o arquivo `index.html` fora do diretório `public`](#5-atualizar-e-mover-o-arquivo-indexhtml-fora-do-diretório-public)
-   6. [Remover qualquer referência %PUBLIC_URL% do arquivo `index.html`](#6-remover-qualquer-referência-public_url-do-arquivo-indexhtml)
-   7. [Adicionar módulo `script type = "module"` no arquivo `index.html`](#7-adicionar-módulo-script-type--module-no-arquivo-indexhtml)
-   8. [Atualizar `process.env.REACT_APP_VARIABLE`](#8-atualizar-processenvreact_app_variable)
-   9. [Atualizar variável em `process.env`](#9-atualizar-variável-em-processenv)
-   10. [Rodando código para visualizar projeto](#10-rodando-código-para-visualizar-projeto)
 5. [Conclusão](#conclusão)
 
 
